@@ -24,6 +24,6 @@ export function predictYAELScore(params: ScoreParams): number {
 
   const irtBonus = (params.studentTheta / 3) * 15;
   
-  let finalScore = bktScore + irtBonus;
+  const finalScore = bktScore + irtBonus;
   return Math.max(50, Math.min(150, Math.round(finalScore)));
 }
