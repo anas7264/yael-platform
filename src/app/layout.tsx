@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import { IBM_Plex_Sans_Arabic, IBM_Plex_Mono } from 'next/font/google';
 import './globals.css';
+import { RootProviders } from '@/components/providers/RootProviders';
 
 const ibmPlexArabic = IBM_Plex_Sans_Arabic({
   subsets: ['arabic', 'latin'],
@@ -52,7 +53,7 @@ export default function RootLayout({
         />
       </head>
       <body className="font-arabic bg-bg-primary text-text-primary antialiased min-h-screen">
-        {children}
+        <RootProviders>{children}</RootProviders>
       </body>
     </html>
   );
