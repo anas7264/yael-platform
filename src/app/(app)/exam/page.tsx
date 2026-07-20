@@ -2,7 +2,11 @@ import type { Metadata } from 'next';
 import { createServerSupabaseClient } from '@/lib/supabase/server';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
-import { Clock, CheckCircle2, AlertCircle, Play, History } from 'lucide-react';
+import Clock from 'lucide-react/dist/esm/icons/clock';
+import CheckCircle2 from 'lucide-react/dist/esm/icons/check-circle-2';
+import AlertCircle from 'lucide-react/dist/esm/icons/alert-circle';
+import Play from 'lucide-react/dist/esm/icons/play';
+import History from 'lucide-react/dist/esm/icons/history';
 import Link from 'next/link';
 import type { Route } from 'next';
 

@@ -9,7 +9,8 @@ import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 import { Card } from '@/components/ui/Card';
 import { useToastStore } from '@/stores/useToastStore';
-import { Mail, Lock } from 'lucide-react';
+import Mail from 'lucide-react/dist/esm/icons/mail';
+import Lock from 'lucide-react/dist/esm/icons/lock';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');

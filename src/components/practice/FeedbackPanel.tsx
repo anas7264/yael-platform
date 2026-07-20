@@ -2,7 +2,10 @@
 
 import { Button } from '@/components/ui/Button';
 import { AIResponse } from '@/components/shared/AIResponse';
-import { CheckCircle2, XCircle, MessageSquare, ArrowLeft } from 'lucide-react';
+import CheckCircle2 from 'lucide-react/dist/esm/icons/check-circle-2';
+import XCircle from 'lucide-react/dist/esm/icons/x-circle';
+import MessageSquare from 'lucide-react/dist/esm/icons/message-square';
+import ArrowLeft from 'lucide-react/dist/esm/icons/arrow-left';
 
 interface FeedbackPanelProps {
   isCorrect: boolean | null;

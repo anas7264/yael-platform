@@ -8,7 +8,8 @@ import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 import { Card } from '@/components/ui/Card';
 import { useToastStore } from '@/stores/useToastStore';
-import { Mail, ArrowRight } from 'lucide-react';
+import Mail from 'lucide-react/dist/esm/icons/mail';
+import ArrowRight from 'lucide-react/dist/esm/icons/arrow-right';
 
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState('');

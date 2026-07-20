@@ -1,7 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import { Search, List, Grid, Star } from 'lucide-react';
+import Search from 'lucide-react/dist/esm/icons/search';
+import List from 'lucide-react/dist/esm/icons/list';
+import Grid from 'lucide-react/dist/esm/icons/grid';
+import Star from 'lucide-react/dist/esm/icons/star';
 import { HebrewIsland } from '@/components/ui/HebrewIsland';
 
 interface VocabWord {

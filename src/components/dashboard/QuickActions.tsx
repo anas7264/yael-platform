@@ -1,7 +1,10 @@
 'use client';
 
 import Link from 'next/link';
-import { Sparkles, BookOpen, ClipboardList, MessageCircle } from 'lucide-react';
+import Sparkles from 'lucide-react/dist/esm/icons/sparkles';
+import BookOpen from 'lucide-react/dist/esm/icons/book-open';
+import ClipboardList from 'lucide-react/dist/esm/icons/clipboard-list';
+import MessageCircle from 'lucide-react/dist/esm/icons/message-circle';
 import type { Route } from 'next';
 
 interface QuickActionsProps {

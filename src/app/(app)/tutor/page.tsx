@@ -4,8 +4,16 @@ import { useState, useRef, useEffect, useCallback } from 'react';
 import { ChatBubble } from '@/components/tutor/ChatBubble';
 import { ChatInput } from '@/components/tutor/ChatInput';
 import { SuggestedTopics } from '@/components/tutor/SuggestedTopics';
-import { StreamingMessage } from '@/components/tutor/StreamingMessage';
-import { Sparkles, PlusCircle, MessageSquare } from 'lucide-react';
+import dynamic from 'next/dynamic';
+import { Skeleton } from '@/components/ui/Skeleton';
+
+const StreamingMessage = dynamic(() => import('@/components/tutor/StreamingMessage').then(mod => mod.StreamingMessage), { 
+  ssr: false, 
+  loading: () => <Skeleton variant="card" className="h-20" /> 
+});
+import Sparkles from 'lucide-react/dist/esm/icons/sparkles';
+import PlusCircle from 'lucide-react/dist/esm/icons/plus-circle';
+import MessageSquare from 'lucide-react/dist/esm/icons/message-square';
 
 interface Message {
   id: string;

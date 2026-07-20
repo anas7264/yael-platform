@@ -1,7 +1,12 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Menu, Bell, Flame, X, Star } from 'lucide-react';
+import Image from 'next/image';
+import Menu from 'lucide-react/dist/esm/icons/menu';
+import Bell from 'lucide-react/dist/esm/icons/bell';
+import Flame from 'lucide-react/dist/esm/icons/flame';
+import X from 'lucide-react/dist/esm/icons/x';
+import Star from 'lucide-react/dist/esm/icons/star';
 import { useAppStore } from '@/stores/useAppStore';
 import { Badge } from '@/components/ui/Badge';
 import { useNotifications } from '@/hooks/useNotifications';
@@ -78,7 +83,7 @@ export function Header({ user, progress, pageTitle = 'الرئيسية' }: Heade
           {/* Avatar */}
           {user?.avatar_url ? (
             /* eslint-disable-next-line @next/next/no-img-element */
-            <img src={user.avatar_url} alt="Avatar" className="w-9 h-9 rounded-full border border-border-subtle" />
+            <Image src={user.avatar_url} alt="Avatar" width={36} height={36} className="rounded-full border border-border-subtle object-cover" priority />
           ) : (
             <div className="w-9 h-9 rounded-full bg-primary-500/20 text-primary-500 flex items-center justify-center font-bold border border-primary-500/30">
               {user?.full_name?.charAt(0) || 'م'}

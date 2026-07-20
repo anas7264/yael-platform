@@ -3,12 +3,17 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useVocabStore } from '@/store/vocab';
-import { FlashCard } from '@/components/vocabulary/FlashCard';
+import dynamic from 'next/dynamic';
+const FlashCard = dynamic(() => import('@/components/vocabulary/FlashCard').then(mod => mod.FlashCard), { 
+  ssr: false, 
+  loading: () => <div className="h-[400px] w-full animate-pulse bg-bg-secondary rounded-2xl" /> 
+});
 import { RatingButtons } from '@/components/vocabulary/RatingButtons';
 import { VocabProgress } from '@/components/vocabulary/VocabProgress';
 import { Button } from '@/components/ui/Button';
 import { Skeleton } from '@/components/ui/Skeleton';
-import { PartyPopper, ArrowRight } from 'lucide-react';
+import PartyPopper from 'lucide-react/dist/esm/icons/party-popper';
+import ArrowRight from 'lucide-react/dist/esm/icons/arrow-right';
 import type { Route } from 'next';
 
 export default function VocabularyReviewPage() {

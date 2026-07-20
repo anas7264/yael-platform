@@ -3,7 +3,11 @@ import { createServerSupabaseClient } from '@/lib/supabase/server';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { ProgressBar } from '@/components/ui/ProgressBar';
-import { BookOpen, Edit3, Type, Headphones, Play } from 'lucide-react';
+import BookOpen from 'lucide-react/dist/esm/icons/book-open';
+import Edit3 from 'lucide-react/dist/esm/icons/edit-3';
+import Type from 'lucide-react/dist/esm/icons/type';
+import Headphones from 'lucide-react/dist/esm/icons/headphones';
+import Play from 'lucide-react/dist/esm/icons/play';
 import Link from 'next/link';
 import type { Route } from 'next';
 

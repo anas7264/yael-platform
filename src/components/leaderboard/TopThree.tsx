@@ -1,6 +1,6 @@
 'use client';
 
-import { Trophy } from 'lucide-react';
+import Trophy from 'lucide-react/dist/esm/icons/trophy';
 import Image from 'next/image';
 
 interface TopUser {

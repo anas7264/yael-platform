@@ -1,7 +1,11 @@
 'use client';
 
 import { Button } from '@/components/ui/Button';
-import { Trophy, Target, Clock, ArrowRight, RotateCcw } from 'lucide-react';
+import Trophy from 'lucide-react/dist/esm/icons/trophy';
+import Target from 'lucide-react/dist/esm/icons/target';
+import Clock from 'lucide-react/dist/esm/icons/clock';
+import ArrowRight from 'lucide-react/dist/esm/icons/arrow-right';
+import RotateCcw from 'lucide-react/dist/esm/icons/rotate-ccw';
 import { useRouter } from 'next/navigation';
 import type { Route } from 'next';
 

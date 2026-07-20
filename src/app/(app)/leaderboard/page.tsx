@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { TopThree } from '@/components/leaderboard/TopThree';
 import { LeaderboardTable, LeaderboardUser } from '@/components/leaderboard/LeaderboardTable';
 import { UserRankCard } from '@/components/leaderboard/UserRankCard';
-import { Trophy } from 'lucide-react';
+import Trophy from 'lucide-react/dist/esm/icons/trophy';
 import { createClient } from '@/lib/supabase/client';
 
 type Period = 'daily' | 'weekly' | 'alltime';

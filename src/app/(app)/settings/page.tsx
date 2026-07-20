@@ -4,7 +4,14 @@ import { useState } from 'react';
 import { useTheme } from '@/components/providers/ThemeProvider';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
-import { Moon, Sun, Monitor, Bell, User, Lock, Target, Trash2 } from 'lucide-react';
+import Moon from 'lucide-react/dist/esm/icons/moon';
+import Sun from 'lucide-react/dist/esm/icons/sun';
+import Monitor from 'lucide-react/dist/esm/icons/monitor';
+import Bell from 'lucide-react/dist/esm/icons/bell';
+import User from 'lucide-react/dist/esm/icons/user';
+import Lock from 'lucide-react/dist/esm/icons/lock';
+import Target from 'lucide-react/dist/esm/icons/target';
+import Trash2 from 'lucide-react/dist/esm/icons/trash-2';
 
 export default function SettingsPage() {
   const { theme, toggleTheme } = useTheme();

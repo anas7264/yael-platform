@@ -7,7 +7,11 @@ import { ExamNavigator } from '@/components/exam/ExamNavigator';
 import { HebrewIsland } from '@/components/ui/HebrewIsland';
 import { Button } from '@/components/ui/Button';
 import { Skeleton } from '@/components/ui/Skeleton';
-import { Bookmark, Clock, ArrowRight, ArrowLeft, Send } from 'lucide-react';
+import Bookmark from 'lucide-react/dist/esm/icons/bookmark';
+import Clock from 'lucide-react/dist/esm/icons/clock';
+import ArrowRight from 'lucide-react/dist/esm/icons/arrow-right';
+import ArrowLeft from 'lucide-react/dist/esm/icons/arrow-left';
+import Send from 'lucide-react/dist/esm/icons/send';
 import type { Route } from 'next';
 
 export default function ExamSessionPage({ params }: { params: { examId: string } }) {

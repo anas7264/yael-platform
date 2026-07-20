@@ -3,7 +3,11 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { useToastStore, ToastType } from '@/stores/useToastStore';
 import { cn } from '@/lib/utils/cn';
-import { X, CheckCircle2, AlertCircle, Info, AlertTriangle } from 'lucide-react';
+import X from 'lucide-react/dist/esm/icons/x';
+import CheckCircle2 from 'lucide-react/dist/esm/icons/check-circle-2';
+import AlertCircle from 'lucide-react/dist/esm/icons/alert-circle';
+import Info from 'lucide-react/dist/esm/icons/info';
+import AlertTriangle from 'lucide-react/dist/esm/icons/alert-triangle';
 
 const icons: Record<ToastType, React.ElementType> = {
   success: CheckCircle2,

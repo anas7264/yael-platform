@@ -1,6 +1,6 @@
 'use client';
 
-import { Calendar } from 'lucide-react';
+import Calendar from 'lucide-react/dist/esm/icons/calendar';
 import { Card } from '@/components/ui/Card';
 
 interface ActivityHeatmapProps {

@@ -1,12 +1,27 @@
 import type { Metadata } from 'next';
 import { createServerSupabaseClient } from '@/lib/supabase/server';
-import { ScoreTrendChart } from '@/components/analytics/ScoreTrendChart';
-import { SectionRadarChart } from '@/components/analytics/SectionRadarChart';
-import { DailyActivityChart } from '@/components/analytics/DailyActivityChart';
+import dynamic from 'next/dynamic';
+import { Skeleton } from '@/components/ui/Skeleton';
+
+const ScoreTrendChart = dynamic(() => import('@/components/analytics/ScoreTrendChart').then(mod => mod.ScoreTrendChart), { 
+  ssr: false, 
+  loading: () => <Skeleton variant="card" className="h-[300px]" /> 
+});
+const SectionRadarChart = dynamic(() => import('@/components/analytics/SectionRadarChart').then(mod => mod.SectionRadarChart), { 
+  ssr: false, 
+  loading: () => <Skeleton variant="circle" className="w-[300px] h-[300px] mx-auto" /> 
+});
+const DailyActivityChart = dynamic(() => import('@/components/analytics/DailyActivityChart').then(mod => mod.DailyActivityChart), { 
+  ssr: false, 
+  loading: () => <Skeleton variant="card" className="h-[300px]" /> 
+});
 import { SkillBreakdown } from '@/components/analytics/SkillBreakdown';
 import { StudyInsights } from '@/components/analytics/StudyInsights';
 import { Card } from '@/components/ui/Card';
-import { BarChart2, TrendingUp, Activity, BookOpen } from 'lucide-react';
+import BarChart2 from 'lucide-react/dist/esm/icons/bar-chart-2';
+import TrendingUp from 'lucide-react/dist/esm/icons/trending-up';
+import Activity from 'lucide-react/dist/esm/icons/activity';
+import BookOpen from 'lucide-react/dist/esm/icons/book-open';
 
 export const metadata: Metadata = {
   title: 'التحليلات — يَعَل',

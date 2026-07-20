@@ -1,7 +1,8 @@
 'use client';
 
 import { useState, useRef } from 'react';
-import { Camera, Edit2 } from 'lucide-react';
+import Camera from 'lucide-react/dist/esm/icons/camera';
+import Edit2 from 'lucide-react/dist/esm/icons/edit-2';
 import Image from 'next/image';
 
 interface ProfileHeaderProps {

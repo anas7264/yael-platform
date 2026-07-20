@@ -1,6 +1,7 @@
 'use client';
 
-import { Trophy, ArrowUpCircle } from 'lucide-react';
+import Trophy from 'lucide-react/dist/esm/icons/trophy';
+import ArrowUpCircle from 'lucide-react/dist/esm/icons/arrow-up-circle';
 import { LeaderboardUser } from './LeaderboardTable';
 
 interface UserRankCardProps {

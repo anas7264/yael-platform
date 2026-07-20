@@ -1,4 +1,8 @@
-import { Target, CheckCircle2, Clock, Flame, BrainCircuit } from 'lucide-react';
+import Target from 'lucide-react/dist/esm/icons/target';
+import CheckCircle2 from 'lucide-react/dist/esm/icons/check-circle-2';
+import Clock from 'lucide-react/dist/esm/icons/clock';
+import Flame from 'lucide-react/dist/esm/icons/flame';
+import BrainCircuit from 'lucide-react/dist/esm/icons/brain-circuit';
 import { Card } from '@/components/ui/Card';
 
 interface StatsOverviewProps {

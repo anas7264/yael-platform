@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef, useEffect, KeyboardEvent, ChangeEvent } from 'react';
-import { ArrowUp } from 'lucide-react';
+import ArrowUp from 'lucide-react/dist/esm/icons/arrow-up';
 
 interface ChatInputProps {
   value: string;

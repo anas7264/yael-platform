@@ -2,7 +2,12 @@
 
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
-import { CheckCircle2, ArrowRight, Brain, RotateCcw, Target, Bookmark } from 'lucide-react';
+import CheckCircle2 from 'lucide-react/dist/esm/icons/check-circle-2';
+import ArrowRight from 'lucide-react/dist/esm/icons/arrow-right';
+import Brain from 'lucide-react/dist/esm/icons/brain';
+import RotateCcw from 'lucide-react/dist/esm/icons/rotate-ccw';
+import Target from 'lucide-react/dist/esm/icons/target';
+import Bookmark from 'lucide-react/dist/esm/icons/bookmark';
 import Link from 'next/link';
 import type { Route } from 'next';
 

@@ -1,7 +1,10 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { Trophy, Flame, Zap, Target } from 'lucide-react';
+import { useEffect, useState, memo } from 'react';
+import Trophy from 'lucide-react/dist/esm/icons/trophy';
+import Flame from 'lucide-react/dist/esm/icons/flame';
+import Zap from 'lucide-react/dist/esm/icons/zap';
+import Target from 'lucide-react/dist/esm/icons/target';
 
 interface StatsGridProps {
   level: number;
@@ -28,7 +31,7 @@ function AnimatedNumber({ target }: { target: number }) {
   return <>{val.toLocaleString('ar-EG')}</>;
 }
 
-export function StatsGrid({ level, xp, streakDays, longestStreak, totalCorrect, totalAnswered }: StatsGridProps) {
+export const StatsGrid = memo(function StatsGrid({ level, xp, streakDays, longestStreak, totalCorrect, totalAnswered }: StatsGridProps) {
   const xpForLevel = 1000;
   const levelProgress = (xp % xpForLevel) / xpForLevel * 100;
   const accuracy = totalAnswered > 0 ? Math.round((totalCorrect / totalAnswered) * 100) : 0;
@@ -95,4 +98,4 @@ export function StatsGrid({ level, xp, streakDays, longestStreak, totalCorrect, 
       ))}
     </div>
   );
-}
+});

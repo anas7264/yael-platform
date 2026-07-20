@@ -4,7 +4,11 @@ import Link from 'next/link';
 import type { Route } from 'next';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils/cn';
-import { LayoutDashboard, BookOpen, Languages, ClipboardCheck, Sparkles } from 'lucide-react';
+import LayoutDashboard from 'lucide-react/dist/esm/icons/layout-dashboard';
+import BookOpen from 'lucide-react/dist/esm/icons/book-open';
+import Languages from 'lucide-react/dist/esm/icons/languages';
+import ClipboardCheck from 'lucide-react/dist/esm/icons/clipboard-check';
+import Sparkles from 'lucide-react/dist/esm/icons/sparkles';
 
 const UI_TEXT = {
   nav: {

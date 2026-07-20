@@ -1,6 +1,8 @@
 'use client';
 
-import { TrendingUp, Clock, Zap } from 'lucide-react';
+import TrendingUp from 'lucide-react/dist/esm/icons/trending-up';
+import Clock from 'lucide-react/dist/esm/icons/clock';
+import Zap from 'lucide-react/dist/esm/icons/zap';
 
 interface StudyInsightsProps {
   weakestKC: string;

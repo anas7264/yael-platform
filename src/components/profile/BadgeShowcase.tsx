@@ -1,7 +1,8 @@
 'use client';
 
-import { useState } from 'react';
-import { Lock, Award } from 'lucide-react';
+import { useState, memo } from 'react';
+import Lock from 'lucide-react/dist/esm/icons/lock';
+import Award from 'lucide-react/dist/esm/icons/award';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 
@@ -18,7 +19,7 @@ interface BadgeShowcaseProps {
   badges: Badge[];
 }
 
-export function BadgeShowcase({ badges }: BadgeShowcaseProps) {
+export const BadgeShowcase = memo(function BadgeShowcase({ badges }: BadgeShowcaseProps) {
   const [selectedBadge, setSelectedBadge] = useState<Badge | null>(null);
 
   const earnedCount = badges.filter(b => b.earned_at).length;
@@ -107,4 +108,4 @@ export function BadgeShowcase({ badges }: BadgeShowcaseProps) {
       )}
     </div>
   );
-}
+});
