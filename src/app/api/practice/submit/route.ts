@@ -1,9 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
-import { createServerSupabaseClient } from '@/lib/supabase/server';
+import type { User } from '@supabase/supabase-js';
 import { createAdminClient } from '@/lib/supabase/admin';
 import { updateBKT, getMasteryLevel, BKT_DEFAULTS } from '@/lib/adaptive/bkt';
 import { selectNextQuestion, type QuestionCandidate } from '@/lib/adaptive/question-selector';
+import { withAuthRateLimitValidation } from '@/lib/api/middleware';
+import { AppError } from '@/lib/api/errors';
 
 const SubmitSchema = z.object({
   sessionId: z.string().uuid(),
@@ -12,21 +14,14 @@ const SubmitSchema = z.object({
   responseTimeMs: z.number().optional(),
 });
 
-export async function POST(req: NextRequest) {
-  const supabase = await createServerSupabaseClient();
-  const { data: { user }, error: authError } = await supabase.auth.getUser();
+type SubmitBody = z.infer<typeof SubmitSchema>;
 
-  if (authError || !user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-
-  const body = await req.json();
-  const parsed = SubmitSchema.safeParse(body);
-  if (!parsed.success) return NextResponse.json({ error: 'Invalid input' }, { status: 400 });
-
-  const { sessionId, questionId, selectedOption, responseTimeMs } = parsed.data;
+async function submitHandler(_req: NextRequest, user: User, body: SubmitBody): Promise<NextResponse> {
+  const { sessionId, questionId, selectedOption, responseTimeMs } = body;
   const supabaseAdmin = createAdminClient();
 
   const { data: question } = await supabaseAdmin.from('questions').select('*').eq('id', questionId).single();
-  if (!question) return NextResponse.json({ error: 'Question not found' }, { status: 404 });
+  if (!question) throw new AppError('NOT_FOUND', 'Question not found');
 
   const isCorrect = question.correct_option === selectedOption;
 
@@ -51,8 +46,8 @@ export async function POST(req: NextRequest) {
   const bktParams = {
     pLearned: kcMastery?.p_learned ?? BKT_DEFAULTS.pLearned,
     pTransit: kcMastery?.p_transit ?? BKT_DEFAULTS.pTransit,
-    pSlip: kcMastery?.p_slip ?? BKT_DEFAULTS.pSlip,
-    pGuess: kcMastery?.p_guess ?? BKT_DEFAULTS.pGuess,
+    pSlip:    kcMastery?.p_slip    ?? BKT_DEFAULTS.pSlip,
+    pGuess:   kcMastery?.p_guess   ?? BKT_DEFAULTS.pGuess,
   };
 
   const bktResult = updateBKT(bktParams, isCorrect);
@@ -60,24 +55,24 @@ export async function POST(req: NextRequest) {
 
   if (kcMastery) {
     await supabaseAdmin.from('user_kc_mastery').update({
-      p_learned: bktResult.pLearned_new,
-      mastery_level: newMasteryLevel,
-      total_attempts: kcMastery.total_attempts + 1,
+      p_learned:        bktResult.pLearned_new,
+      mastery_level:    newMasteryLevel,
+      total_attempts:   kcMastery.total_attempts + 1,
       correct_attempts: kcMastery.correct_attempts + (isCorrect ? 1 : 0),
       last_practiced_at: new Date().toISOString(),
     }).eq('id', kcMastery.id);
   } else {
     await supabaseAdmin.from('user_kc_mastery').insert({
-      user_id: user.id,
-      kc_id: question.kc_id,
-      p_learned: bktResult.pLearned_new,
-      p_transit: bktParams.pTransit,
-      p_slip: bktParams.pSlip,
-      p_guess: bktParams.pGuess,
-      irt_ability: 0,
-      total_attempts: 1,
+      user_id:          user.id,
+      kc_id:            question.kc_id,
+      p_learned:        bktResult.pLearned_new,
+      p_transit:        bktParams.pTransit,
+      p_slip:           bktParams.pSlip,
+      p_guess:          bktParams.pGuess,
+      irt_ability:      0,
+      total_attempts:   1,
       correct_attempts: isCorrect ? 1 : 0,
-      mastery_level: newMasteryLevel,
+      mastery_level:    newMasteryLevel,
       last_practiced_at: new Date().toISOString(),
     });
   }
@@ -92,23 +87,23 @@ export async function POST(req: NextRequest) {
   const { data: progress } = await supabaseAdmin.from('user_progress').select('*').eq('user_id', user.id).single();
   if (progress) {
     await supabaseAdmin.from('user_progress').update({
-      xp: progress.xp + xpEarned,
+      xp:                       progress.xp + xpEarned,
       total_questions_answered: progress.total_questions_answered + 1,
-      total_correct_answers: progress.total_correct_answers + (isCorrect ? 1 : 0),
+      total_correct_answers:    progress.total_correct_answers + (isCorrect ? 1 : 0),
     }).eq('id', progress.id);
   }
 
   await supabaseAdmin.rpc('calculate_level', { p_user_id: user.id });
-  await supabaseAdmin.rpc('upsert_daily_activity', { 
-    p_user_id: user.id,
+  await supabaseAdmin.rpc('upsert_daily_activity', {
+    p_user_id:           user.id,
     p_study_time_minutes: (responseTimeMs || 0) / 60000,
     p_questions_answered: 1,
-    p_correct_answers: isCorrect ? 1 : 0,
-    p_xp_earned: xpEarned
+    p_correct_answers:    isCorrect ? 1 : 0,
+    p_xp_earned:          xpEarned,
   });
 
   await supabaseAdmin.from('questions').update({
-    times_shown: (question.times_shown || 0) + 1,
+    times_shown:   (question.times_shown || 0) + 1,
     times_correct: (question.times_correct || 0) + (isCorrect ? 1 : 0),
   }).eq('id', question.id);
 
@@ -116,7 +111,7 @@ export async function POST(req: NextRequest) {
   if (session) {
     await supabaseAdmin.from('practice_sessions').update({
       correct_answers: session.correct_answers + (isCorrect ? 1 : 0),
-      xp_earned: session.xp_earned + xpEarned
+      xp_earned:       session.xp_earned + xpEarned,
     }).eq('id', sessionId);
   }
 
@@ -137,7 +132,7 @@ export async function POST(req: NextRequest) {
     kcId: q.kc_id,
     a: q.discrimination,
     b: q.difficulty,
-    c: q.guessing
+    c: q.guessing,
   }));
 
   const studentTheta = (progress?.level || 1) / 10;
@@ -149,6 +144,8 @@ export async function POST(req: NextRequest) {
     correctOption: question.correct_option,
     xpEarned,
     masteryUpdate: { newLevel: newMasteryLevel, pLearned: bktResult.pLearned_new },
-    nextQuestion: fullNextQuestion || null
+    nextQuestion: fullNextQuestion || null,
   });
 }
+
+export const POST = withAuthRateLimitValidation(SubmitSchema, 'practice', submitHandler);

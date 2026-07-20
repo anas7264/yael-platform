@@ -1,12 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
+import type { User } from '@supabase/supabase-js';
 import { createServerSupabaseClient } from '@/lib/supabase/server';
+import { withAuth, withRateLimit } from '@/lib/api/middleware';
 
-export async function GET(req: NextRequest) {
-  const supabase = await createServerSupabaseClient();
-  const { data: { user }, error: authError } = await supabase.auth.getUser();
-
-  if (authError || !user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
-
+async function handler(req: NextRequest, user: User): Promise<NextResponse> {
+  void user; // authenticated via withAuth — user identity not needed for this search
   const { searchParams } = new URL(req.url);
   const query = searchParams.get('q');
 
@@ -14,14 +12,15 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ results: [] });
   }
 
-  // Text search on hebrew_word and arabic_meaning (ILIKE %q%)
+  const supabase = await createServerSupabaseClient();
   const { data: words, error } = await supabase
     .from('vocabulary_words')
     .select('id, hebrew_word, arabic_meaning, part_of_speech')
     .or(`hebrew_word.ilike.%${query}%,arabic_meaning.ilike.%${query}%`)
     .limit(10);
 
-  if (error) return NextResponse.json({ error: 'Search failed' }, { status: 500 });
-
+  if (error) throw error;
   return NextResponse.json({ results: words });
 }
+
+export const GET = withAuth(withRateLimit(handler, 'general'));
