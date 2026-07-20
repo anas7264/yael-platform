@@ -1,9 +1,19 @@
+import type { Metadata } from 'next';
 import { createServerSupabaseClient } from '@/lib/supabase/server';
 import { Button } from '@/components/ui/Button';
 import { Card } from '@/components/ui/Card';
 import { Clock, CheckCircle2, AlertCircle, Play, History } from 'lucide-react';
 import Link from 'next/link';
 import type { Route } from 'next';
+
+export const metadata: Metadata = {
+  title: 'الامتحان التجريبي — يَعَل',
+  description: 'محاكاة حقيقية لاختبار ياعيل لتقييم مستواك الفعلي والاستعداد للامتحان النهائي.',
+  openGraph: {
+    title: 'الامتحان التجريبي — يَعَل',
+    description: 'محاكاة حقيقية لاختبار ياعيل لتقييم مستواك الفعلي والاستعداد للامتحان النهائي.',
+  },
+};
 
 export default async function ExamIntroPage() {
   const supabase = await createServerSupabaseClient();

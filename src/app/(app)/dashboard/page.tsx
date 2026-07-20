@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import { createServerSupabaseClient } from '@/lib/supabase/server';
 import { HeroSection } from '@/components/dashboard/HeroSection';
 import { StatsGrid } from '@/components/dashboard/StatsGrid';
@@ -5,6 +6,15 @@ import { SectionMasteryGrid } from '@/components/dashboard/SectionMasteryGrid';
 import { QuickActions } from '@/components/dashboard/QuickActions';
 import { RecentActivity } from '@/components/dashboard/RecentActivity';
 import { StreakCalendar } from '@/components/dashboard/StreakCalendar';
+
+export const metadata: Metadata = {
+  title: 'لوحة التحكم — يَعَل',
+  description: 'تتبع تقدمك في تحضير امتحان ياعيل، مع إحصائيات الأداء وخطة الدراسة الذكية.',
+  openGraph: {
+    title: 'لوحة التحكم — يَعَل',
+    description: 'تتبع تقدمك في تحضير امتحان ياعيل، مع إحصائيات الأداء وخطة الدراسة الذكية.',
+  },
+};
 
 export default async function DashboardPage() {
   const supabase = await createServerSupabaseClient();

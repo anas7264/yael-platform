@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import { createServerSupabaseClient } from '@/lib/supabase/server';
 import { ScoreTrendChart } from '@/components/analytics/ScoreTrendChart';
 import { SectionRadarChart } from '@/components/analytics/SectionRadarChart';
@@ -6,6 +7,15 @@ import { SkillBreakdown } from '@/components/analytics/SkillBreakdown';
 import { StudyInsights } from '@/components/analytics/StudyInsights';
 import { Card } from '@/components/ui/Card';
 import { BarChart2, TrendingUp, Activity, BookOpen } from 'lucide-react';
+
+export const metadata: Metadata = {
+  title: 'التحليلات — يَعَل',
+  description: 'تحليلات مفصلة لأدائك في امتحان ياعيل مع رسوم بيانية تفاعلية ورؤى ذكية.',
+  openGraph: {
+    title: 'التحليلات — يَعَل',
+    description: 'تحليلات مفصلة لأدائك في امتحان ياعيل مع رسوم بيانية تفاعلية ورؤى ذكية.',
+  },
+};
 
 export default async function AnalyticsPage() {
   const supabase = await createServerSupabaseClient();

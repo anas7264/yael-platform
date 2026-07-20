@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import { createServerSupabaseClient } from '@/lib/supabase/server';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
@@ -5,6 +6,15 @@ import { BookOpen, Brain, Play, Flame } from 'lucide-react';
 import Link from 'next/link';
 import type { Route } from 'next';
 import { VocabBrowser } from '@/components/vocabulary/VocabBrowser';
+
+export const metadata: Metadata = {
+  title: 'المفردات — يَعَل',
+  description: 'نظام التكرار المتباعد الذكي (FSRS) لحفظ المفردات العبرية وتعزيز مهاراتك اللغوية.',
+  openGraph: {
+    title: 'المفردات — يَعَل',
+    description: 'نظام التكرار المتباعد الذكي (FSRS) لحفظ المفردات العبرية وتعزيز مهاراتك اللغوية.',
+  },
+};
 
 export default async function VocabularyPage() {
   const supabase = await createServerSupabaseClient();

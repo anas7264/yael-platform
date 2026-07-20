@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import { createServerSupabaseClient } from '@/lib/supabase/server';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
@@ -5,6 +6,15 @@ import { ProgressBar } from '@/components/ui/ProgressBar';
 import { BookOpen, Edit3, Type, Headphones, Play } from 'lucide-react';
 import Link from 'next/link';
 import type { Route } from 'next';
+
+export const metadata: Metadata = {
+  title: 'التمرين — يَعَل',
+  description: 'تدرب على أقسام امتحان ياعيل الأربعة مع نظام تكيفي ذكي يناسب مستواك.',
+  openGraph: {
+    title: 'التمرين — يَعَل',
+    description: 'تدرب على أقسام امتحان ياعيل الأربعة مع نظام تكيفي ذكي يناسب مستواك.',
+  },
+};
 
 const SECTIONS = [
   { id: 'reading', name: 'الاستيعاب المقروء', icon: <BookOpen className="w-8 h-8" />, color: 'text-indigo-500', bg: 'bg-indigo-50', border: 'border-indigo-200' },

@@ -1,8 +1,18 @@
+import type { Metadata } from 'next';
 import { createServerSupabaseClient } from '@/lib/supabase/server';
 import { ProfileHeader } from '@/components/profile/ProfileHeader';
 import { StatsOverview } from '@/components/profile/StatsOverview';
 import { BadgeShowcase, Badge } from '@/components/profile/BadgeShowcase';
 import { ActivityHeatmap } from '@/components/profile/ActivityHeatmap';
+
+export const metadata: Metadata = {
+  title: 'الملف الشخصي — يَعَل',
+  description: 'ملفك الشخصي في منصة ياعيل — الإنجازات والأوسمة وسجل النشاط.',
+  openGraph: {
+    title: 'الملف الشخصي — يَعَل',
+    description: 'ملفك الشخصي في منصة ياعيل — الإنجازات والأوسمة وسجل النشاط.',
+  },
+};
 
 export default async function ProfilePage() {
   const supabase = await createServerSupabaseClient();
