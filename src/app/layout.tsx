@@ -28,6 +28,7 @@ export const metadata: Metadata = {
     locale: 'ar_SA',
     type: 'website',
   },
+  manifest: '/manifest.json',
 };
 
 export const viewport: Viewport = {
