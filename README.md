@@ -1,36 +1,49 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# YAEL AI Platform
 
-## Getting Started
+منصة متقدمة لتعليم اللغة العبرية بالاعتماد على الذكاء الاصطناعي وتقنيات التعلم التكيفي.
+An advanced AI-powered platform for learning Hebrew using adaptive learning techniques.
 
-First, run the development server:
+## Features (الميزات)
+- **Adaptive Learning Engine**: Item Response Theory (IRT) and Bayesian Knowledge Tracing (BKT) to model student knowledge.
+- **Spaced Repetition (FSRS)**: Optimal flashcard scheduling for vocabulary retention.
+- **AI-Powered Chat**: Real-time contextual tutor for grammar and vocabulary.
+- **Gamification**: Streaks, XP, levels, and badges.
+- **Full RTL Support**: Optimized for Arabic speaking learners.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Tech Stack (التقنيات المستخدمة)
+- **Framework**: Next.js 14 (App Router)
+- **Styling**: Tailwind CSS + Framer Motion
+- **Database / Auth**: Supabase
+- **State Management**: Zustand
+- **Data Fetching**: TanStack Query
+- **AI Models**: Groq (Llama 3 / Mixtral)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Setup Instructions (تعليمات التثبيت)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Clone the repository
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Copy `.env.example` to `.env.local` and configure your environment variables.
+4. Run the development server:
+   ```bash
+   npm run dev
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Environment Variables (متغيرات البيئة)
+Create a `.env.local` file with the following:
+- `NEXT_PUBLIC_SUPABASE_URL`: Your Supabase project URL
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY`: Supabase anonymous key
+- `SUPABASE_SERVICE_ROLE_KEY`: Supabase service role key (for cron/admin tasks)
+- `GROQ_API_KEY`: API key for Groq AI
+- `NEXT_PUBLIC_APP_URL`: The URL of your application (e.g., http://localhost:3000)
+- `NEXT_PUBLIC_APP_ENV`: Environment ('development', 'staging', 'production')
+- `CRON_SECRET`: Optional secret for Vercel Cron authentication
 
-## Learn More
+## Deployment Guide (دليل النشر)
+This project is optimized for deployment on Vercel.
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Connect your GitHub repository to Vercel.
+2. Add all environment variables from your `.env.local` into the Vercel dashboard.
+3. Deploy! Vercel will automatically read `vercel.json` to setup the cron jobs.
