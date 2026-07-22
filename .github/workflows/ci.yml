@@ -3,6 +3,13 @@ on: [push, pull_request]
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      NEXT_PUBLIC_SUPABASE_URL: https://placeholder.supabase.co
+      NEXT_PUBLIC_SUPABASE_ANON_KEY: placeholder-anon-key
+      SUPABASE_SERVICE_ROLE_KEY: placeholder-service-role-key
+      GROQ_API_KEY: placeholder-groq-key
+      NEXT_PUBLIC_APP_URL: https://yael.vercel.app
+      NEXT_PUBLIC_APP_ENV: production
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
